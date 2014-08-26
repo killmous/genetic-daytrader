@@ -1,5 +1,5 @@
 BUILDDIR    = ./bin/
-SOURCEDIR   = ./src/
+SOURCEDIR   = ./genetic-src/
 
 DEFINES     =
 

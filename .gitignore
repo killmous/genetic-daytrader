@@ -1,2 +1,3 @@
-.DS_Store
-ga
+./.DS_Store
+./ga
+./bin/*.o

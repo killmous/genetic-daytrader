@@ -15,7 +15,17 @@ double fitness(Chromosome chromo) {
 }
 
 int main(int argc, char **argv) {
+    sqlite3 *db;
+    char *zErrMsg = nullptr;
+    int rc;
+
+    rc = sqlite3_open("test.db", &db);
+
+    if(rc) {
+        printf("Error opening test.db\n");
+    }
+
     Population pop(popSize, entropy, 0.001, 0.1, fitness);
-    pop.run(iterations, true);
+    pop.run(iterations);
     return 0;
 }

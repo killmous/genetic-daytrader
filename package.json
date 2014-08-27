@@ -1,0 +1,9 @@
+{
+  "name": "genetic-daytracker",
+  "description": "A project to make ca$h money",
+  "author": "Jacob Hegna and Wes Caldwell",
+  "dependencies": {
+    "request": "^2.40.0",
+    "sqlite3": "^2.2.7"
+  }
+}

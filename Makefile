@@ -1,6 +1,6 @@
 BUILDDIR    = ./bin/
 INCLUDEDIR  = ./include/
-SOURCEDIR   = ./src/
+SOURCEDIR   = ./genetic-src/
 
 DEFINES     =
 

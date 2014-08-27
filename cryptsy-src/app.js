@@ -3,16 +3,16 @@ var request = require('request'),
     db = new sqlite3.Database('test.db');
 
 db.serialize(function() {
-    db.run('                             \
-        CREATE TABLE IF NOT EXISTS btc ( \
-            id INTEGER(8),               \
-            time VARCHAR(30),            \
-            type VARCHAR(4),             \
-            price VARCHAR(10),           \
-            quantity VARCHAR(10),        \
-            total VARCHAR(10)            \
-        )                                \
-    ');
+    db.run(
+        'CREATE TABLE IF NOT EXISTS btc (' +
+            'id INTEGER(8), ' +
+            'time VARCHAR(30), ' +
+            'type VARCHAR(4), ' +
+            'price VARCHAR(10), ' +
+            'quantity VARCHAR(10), ' +
+            'total VARCHAR(10)'
+        ')'
+    );
     request('http://pubapi1.cryptsy.com/api.php?method=marketdata', function(error, response, body) {
         var pretty_data = JSON.parse(body)['return']['markets']['BTC/USD'];
         var btc = {

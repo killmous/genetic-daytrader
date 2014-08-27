@@ -60,7 +60,7 @@ void Population::run(int iterations, bool debug) {
 void Population::print(void) {
     for(int i = 0; i < _populationSize; ++i)
     {
-        printf("%d ", _population[i]);
+        printf((i != _populationSize-1) ? "%d " : "%d", _population[i]);
     } printf("\n");
 }
 

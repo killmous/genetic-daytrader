@@ -6,9 +6,9 @@ Cryptocurrency daytrader utilizing genetic strategies
 
 ###Gene 1
 
-Bit 1 <= Whether to invest in bitcoin
-Bit 2 <= Whether to invest in litecoin
-Bit 3 <= Whether to invest in dogecoin
+Bit 1 <= Whether to invest in bitcoin  
+Bit 2 <= Whether to invest in litecoin  
+Bit 3 <= Whether to invest in dogecoin  
 
 ###Gene 2
 
@@ -31,6 +31,7 @@ Moving Average
 Bit 1 <= MA type (0 = simple, 1 = exponential)
 
 Bits 2-3 are short period
+
 | Periods | Bitstring |
 | ------- | --------- |
 | 5       | 00        |
@@ -39,11 +40,15 @@ Bits 2-3 are short period
 | 20      | 11        |
 
 Bits 4-5 are long period
+
 | Periods | Bitstring |
 | ------- | --------- |
 | 30      | 00        |
 | 40      | 01        |
 | 50      | 10        |
 | 60      | 11        |
+
+Example: bitstring `10111` would mean that we are using an exponential moving average with
+a short period of 10 periods and a long period of 60 periods.
 
 ###TODO: FINISH

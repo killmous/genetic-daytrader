@@ -1,13 +1,13 @@
 BUILDDIR    = ./bin/
 INCLUDEDIR  = ./include/
-SOURCEDIR   = ./src/
+SOURCEDIR   = ./genetic-src/
 
 DEFINES     =
 
 SDIRS       = $(wildcard $(SOURCEDIR)*/)
 VPATH       = $(SOURCEDIR):$(SDIRS):$(foreach dir, $(SDIRS), $(wildcard $(dir)*/))
 
-IFILES      = $(shell find $(SOURCEDIR) -name '*.cpp')
+IFILES      = $(shell find $(SOURCEDIR) -name '*.cpp') $(shell find $(SOURCEDIR) -name '*.c')
 
 OFILES      = $(subst $(SOURCEDIR),  $(BUILDDIR), $(addsuffix .o, $(notdir $(shell find $(SOURCEDIR)  -name '*.cpp'))))
 

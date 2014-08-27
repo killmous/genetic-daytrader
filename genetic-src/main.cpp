@@ -1,4 +1,5 @@
 #include <cstdio>
+#include "sqlite3.h"
 #include "ga.h"
 
 bool bitAt(int offset, Chromosome chromo) {

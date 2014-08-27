@@ -10,7 +10,7 @@ Population::Population(int populationSize,
                        int entropy,
                        double pm,
                        double pc,
-                       double* (*fitnessFunc)(Chromosome*, int)) {
+                       std::function<double*(Chromosome*, int)> fitnessFunc) {
     _populationSize = populationSize;
     _entropy = entropy;
     _population = new Chromosome[_populationSize];
@@ -19,11 +19,27 @@ Population::Population(int populationSize,
     _fitnessFunc = fitnessFunc;
 
     std::random_device rd;
-    for(int i = 0; i < _populationSize; ++i)
-    {
+    for(int i = 0; i < _populationSize; ++i) {
         _population[i] = int(rd()/double(rd.max())*(1 << entropy));
     }
 }
+
+Population::Population(int populationSize,
+                       int entropy,
+                       double pm,
+                       double pc,
+                       std::function<double(Chromosome)> fitnessFunc) :
+    Population( populationSize,
+                entropy,
+                pm,
+                pc,
+                [=](Chromosome* pop, int popsize) -> double* {
+                    double* ret = new double[popsize];
+                    for (int i = 0; i < popsize; ++i) {
+                        ret[i] = fitnessFunc(pop[i]);
+                    }
+                    return ret;
+                }) {}
 
 Population::~Population(void) {
     delete[] _population;

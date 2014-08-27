@@ -1,11 +1,11 @@
 CC := g++
-CFLAGS := -std=c++11
+CFLAGS := -std=c++11 -O3
 SRCDIR := src/
 BINDIR := bin/
 EXEC := ga
 
 all:
-	g++ $(CFLAGS) -o $(BINDIR)$(EXEC) $(SRCDIR)ga.cpp $(SRCDIR)main.cpp
+	$(CC) $(CFLAGS) -o $(BINDIR)$(EXEC) $(SRCDIR)ga.cpp $(SRCDIR)main.cpp
 
 clean:
 	rm $(BINDIR)*

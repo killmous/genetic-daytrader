@@ -15,8 +15,8 @@ OFILES     += $(subst $(SOURCEDIR),  $(BUILDDIR), $(addsuffix .o, $(notdir $(she
 
 CXX         = g++
 CC          = gcc
-CXXFLAGS    = -c -w -O3 -std=c++11
-CCFLAGS     = -c -w -O3
+CXXFLAGS    = -g -c -w -O3 -std=c++11
+CCFLAGS     = -g -c -w -O3
 LINKFLAGS   = -pthread -ldl
 
 

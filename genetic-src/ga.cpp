@@ -86,6 +86,8 @@ void Population::evolve(void) {
         }
     }
 
+    delete[] _population;
+    delete[] fitness;
     _population = intermediate;
 }
 

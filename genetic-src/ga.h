@@ -27,7 +27,6 @@ private:
     Chromosome* _population;
     double _pmutation;
     double _pcrossover;
-//    double* (*_fitnessFunc)(Chromosome*, int);
     std::function<double*(Chromosome*, int)> _fitnessFunc;
 
     void evolve(void);

@@ -48,7 +48,22 @@ Bits 4-5 are long period
 | 50      | 10        |
 | 60      | 11        |
 
-Example: bitstring `10111` would mean that we are using an exponential moving average with
-a short period of 10 periods and a long period of 60 periods.
+###Gene 4
 
-###TODO: FINISH
+Trailing Stop
+
+| Trailing Stop % | Bitstring |
+| --------------- | --------- |
+| 1%              | 001       |
+| 2%              | 010       |
+| 3%              | 011       |
+| 4%              | 100       |
+| 5%              | 101       |
+| 6%              | 110       |
+| 7%              | 111       |
+| 8%              | 000       |
+
+---
+
+Example: bitstring `10111001` would mean that we are using an exponential moving average with
+a short period of 10 periods, a long period of 60 periods, and a trailing stop of 1%.

@@ -1,8 +1,3 @@
-BUILDDIR    = ./bin/
-SOURCEDIR   = ./genetic-src/
-
-DEFINES     =
-
 SDIRS       = $(wildcard $(SOURCEDIR)*/)
 VPATH       = $(SOURCEDIR):$(SDIRS):$(foreach dir, $(SDIRS), $(wildcard $(dir)*/))
 

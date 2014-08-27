@@ -1,6 +1,6 @@
 var request = require('request'),
     sqlite3 = require('sqlite3'),
-    db = new sqlite3.Database('test.sql');
+    db = new sqlite3.Database('test.db');
 
 db.serialize(function() {
     db.run('                             \

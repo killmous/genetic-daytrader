@@ -65,4 +65,4 @@ Trailing Stop
 
 ---
 
-Example: bitstring `10110111001` would mean that we are investing in bitcoin and dogecoin, we are using an exponential moving average with a short period of 10 periods, a long period of 60 periods, and a trailing stop of 1%.
+Example: bitstring `10101110111001` would mean that we are investing in bitcoin and dogecoin, we are using a period of 15 minutes, we are using an exponential moving average with a short period of 10 periods, a long period of 60 periods, and a trailing stop of 1%.

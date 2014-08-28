@@ -21,8 +21,9 @@ Frequency
 | 15 mins   | 011       |
 | 30 mins   | 100       |
 | 1 hour    | 101       |
-| 5 hours   | 110       |
-| Daily     | 111       |
+| 2 hours   | 110       |
+| 5 hours   | 111       |
+| Daily     | 000       |
 
 ###Gene 3
 

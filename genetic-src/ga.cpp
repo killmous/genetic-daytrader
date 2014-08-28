@@ -6,6 +6,8 @@
 //Population
 //
 
+std::random_device rd;
+
 Population::Population(int populationSize,
                        int entropy,
                        double pm,
@@ -18,7 +20,6 @@ Population::Population(int populationSize,
     _pcrossover = pc;
     _fitnessFunc = fitnessFunc;
 
-    std::random_device rd;
     for(int i = 0; i < _populationSize; ++i) {
         _population[i] = int(rd()/double(rd.max())*(1 << entropy));
     }
@@ -35,7 +36,7 @@ Population::Population(int populationSize,
                 pc,
                 [=](Chromosome* pop, int popsize) -> double* {
                     double* ret = new double[popsize];
-                    for (int i = 0; i < popsize; ++i) {
+                    for(int i = 0; i < popsize; ++i) {
                         ret[i] = fitnessFunc(pop[i]);
                     }
                     return ret;
@@ -65,13 +66,8 @@ void Population::print(void) {
 void Population::evolve(void) {
     double* fitness = _fitnessFunc(_population, _populationSize);
 
-    Chromosome* intermediate = new Chromosome[_populationSize];
-    for(int i = 0; i < _populationSize; ++i) {
-        Chromosome chromo = chooseWeighted(_population, fitness, _populationSize);
-        intermediate[i] = chromo;
-    }
+    Chromosome* intermediate = chooseWeighted(_population, fitness, _populationSize);
 
-    std::random_device rd;
     for(int i = 0; i < _populationSize; ++i) {
         if(rd()/double(rd.max()) <= _pcrossover && i != _populationSize - 1) {
             int crossoverPoint = int(rd()/double(rd.max())*(_entropy - 1));
@@ -91,19 +87,22 @@ void Population::evolve(void) {
     _population = intermediate;
 }
 
-Chromosome chooseWeighted(Chromosome* pop, double* fitness, int size) {
+Chromosome* chooseWeighted(Chromosome* pop, double* fitness, int size) {
     double sumOfWeights = 0;
+    Chromosome* chromo = new Chromosome[size];
     for(int i = 0; i < size; ++i) {
         sumOfWeights += fitness[i];
     }
 
-    std::random_device rd;
-    double rnd = rd()/double(rd.max())*sumOfWeights;
     for (int i = 0; i < size; ++i) {
-        if (rnd < fitness[i]) {
-            return pop[i];
+        double rnd = rd()/double(rd.max())*sumOfWeights;
+        for (int j = 0; j < size; ++j) {
+            if (rnd < fitness[j]) {
+                chromo[i] = pop[j];
+                break;
+            }
+            rnd -= fitness[j];
         }
-        rnd -= fitness[i];
     }
-    //If it gets here, we're boned
+    return chromo;
 }

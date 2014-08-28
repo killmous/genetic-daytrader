@@ -9,19 +9,9 @@ bool bitAt(int offset, Chromosome chromo) {
     return (chromo >> (offset - 1)) & 0b1;
 }
 
-static int callback(void* data, int argc, char **argv, char **azColName) {
-    int i;
-    fprintf(stderr, "%s: ", (const char*)data);
-    for(i=0; i<argc; i++){
-       printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
-    }
-    printf("\n");
-    return 0;
-}
-
 int iterations = 10;
 int popSize = 300;
-int entropy = 8;
+int entropy = 14;
 
 Database* db;
 
@@ -37,10 +27,11 @@ int main(int argc, char **argv) {
 
     db = new Database(argv[1]);
     printf("%s\n", db->query("SELECT * FROM btc")[0][3].c_str());
-    delete db;
 
     Population pop(popSize, entropy, 0.001, 0.1, fitness);
-    pop.run(iterations);
+    pop.run(iterations, true);
+
+    delete db;
 
     return 0;
 }

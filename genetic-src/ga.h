@@ -32,6 +32,6 @@ private:
     void evolve(void);
 };
 
-Chromosome chooseWeighted(Chromosome* pop, double* fitness, int size);
+Chromosome* chooseWeighted(Chromosome* pop, double* fitness, int size);
 
 #endif

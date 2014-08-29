@@ -10,7 +10,7 @@ db.serialize(function() {
             'type VARCHAR(4), ' +
             'price VARCHAR(10), ' +
             'quantity VARCHAR(10), ' +
-            'total VARCHAR(10)'
+            'total VARCHAR(10)' +
         ')'
     );
     request('http://pubapi1.cryptsy.com/api.php?method=marketdata', function(error, response, body) {

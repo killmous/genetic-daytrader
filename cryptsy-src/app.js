@@ -37,6 +37,7 @@ db.serialize(function() {
      * Multiline strings are just so hard to implement
      * amiright @javascript
      */
+    process.stdout.write('Initializing sqlite3 table...');
     db.run(
         'CREATE TABLE IF NOT EXISTS btc (' +
             'time VARCHAR(30), ' +
@@ -45,11 +46,15 @@ db.serialize(function() {
             'min VARCHAR(10) ' +
         ')'
     );
+    console.log('done!');
 
     /*
      * I swear this shit takes like 4 days to respond
      */
+    process.stdout.write('Starting request to Cryptsy...');
     request('http://pubapi1.cryptsy.com/api.php?method=marketdata', function(error, response, body) {
+        console.log('done!');
+        process.stdout.write('Processing data into properly-formatted JSON...');
         var pretty_data = JSON.parse(body)['return']['markets']['BTC/USD'];
         var btc = {
             name: pretty_data['primaryname'],
@@ -95,6 +100,8 @@ db.serialize(function() {
             }
             hourly_trades.push(trade);
         });
+        console.log('done!');
+        process.stdout.write('Writing to database...');
         for(var trade in hourly_trades) {
             var query = 'INSERT INTO btc (' +
                 'time, avg, max, min' +
@@ -107,6 +114,7 @@ db.serialize(function() {
             ')';
             db.run(query);
         }
+        console.log('done!');
         db.close();
     });
 });

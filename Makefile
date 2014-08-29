@@ -15,9 +15,12 @@ OFILES     += $(subst $(SOURCEDIR),  $(BUILDDIR), $(addsuffix .o, $(notdir $(she
 
 CXX         = g++
 CC          = gcc
-CXXFLAGS    = -g -c -w -O3 -std=c++11
-CCFLAGS     = -g -c -w -O3
-LINKFLAGS   = -pthread -ldl
+LINKER      = $(CXX)
+ARCH        = 64
+
+CXXFLAGS    = -c -g -w -O3 -m$(ARCH) -std=c++11
+CCFLAGS     = -c -g -w -O3 -m$(ARCH)
+LINKFLAGS   = -pthread -ldl -m$(ARCH)
 
 
 TARGET = ga
@@ -25,7 +28,7 @@ TARGET = ga
 all: $(TARGET)
 
 $(TARGET): $(foreach file, $(OFILES), $(BUILDDIR)$(file))
-	$(CXX) $^ $(LINKFLAGS) -o $@
+	$(LINKER) $^ $(LINKFLAGS) -o $@
 
 $(BUILDDIR)%.cpp.o: %.cpp
 	$(CXX) $(foreach def, $(DEFINES), -D $(def)) $(CXXFLAGS) $< -o $@

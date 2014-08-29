@@ -18,7 +18,7 @@ bool* bitArray(int entropy, Chromosome chromo) {
     return ret;
 }
 
-int iterations = 10;
+int iterations = 1000000;
 int popSize = 300;
 int entropy = 14;
 
@@ -66,7 +66,7 @@ double fitness(Chromosome chromo) {
     int trailingStop = bitstring[2] * 4 + bitstring[1] * 2 + bitstring[0];
     if(trailingStop == 0) trailingStop = 8;
 
-    printf("BTC: %d\nLTC: %d\nDOGE: %d\nfreq: %d\nisExpMA: %d\nshort: %d\nlong: %d\nTStop: %d\n", buyBTC, buyLTC, buyDOGE, freq, isExpMA, shortPeriod, longPeriod, trailingStop);
+    //printf("BTC: %d\nLTC: %d\nDOGE: %d\nfreq: %d\nisExpMA: %d\nshort: %d\nlong: %d\nTStop: %d\n", buyBTC, buyLTC, buyDOGE, freq, isExpMA, shortPeriod, longPeriod, trailingStop);
 
     delete[] bitstring;
 
@@ -82,10 +82,10 @@ int main(int argc, char **argv) {
     db = new Database(argv[1]);
     printf("%s\n", db->query("SELECT * FROM btc")[0][3].c_str());
 
-    //Population pop(popSize, entropy, 0.001, 0.1, fitness);
-    //pop.run(iterations, true);
+    Population pop(popSize, entropy, 0.001, 0.1, fitness);
+    pop.run(iterations, true);
 
-    fitness(0b11010101101010);
+    //fitness(0b11010101101010);
 
     delete db;
 

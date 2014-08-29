@@ -1,5 +1,8 @@
 language: c++
 
+install:
+    - sudo apt-get install g++-4.8
+
 script: make
 
 notifications:

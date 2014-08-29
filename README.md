@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/killmous/genetic-daytrader.svg?branch=master)](https://travis-ci.org/killmous/genetic-daytrader)
 #genetic-daytrader
 
 Cryptocurrency daytrader utilizing genetic strategies

@@ -71,7 +71,7 @@ db.serialize(function() {
          */
         for(var trade in btc['trades']) {
             var date = new Date(btc['trades'][trade]['time'].split(' ').join('T'))
-            btc['trades'][trade]['time'] = date.getTime() / 1000;
+            btc['trades'][trade]['time'] = Math.round((date.getTime() / 1000)/3600)*3600;
             if(hours.indexOf(btc['trades'][trade]['time']) < 0) {
                 hours.push(btc['trades'][trade]['time']);
             }

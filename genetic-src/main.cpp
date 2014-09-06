@@ -18,13 +18,36 @@ bool* bitArray(int entropy, Chromosome chromo) {
     return ret;
 }
 
-int iterations = 1000000;
-int popSize = 300;
+int iterations = 1000;
+int popSize = 60;
 int entropy = 14;
 
 Database* db;
 
+double fitness(Chromosome chromo);
+double backtest(int money, bool buyBTC, bool buyLTC, bool buyDOGE, int freq, bool isExpMA, int shortPeriod, int longPeriod, int trailingStop);
+
+int main(int argc, char **argv) {
+    if(argc < 2) {
+        printf("Incorrect usage\n");
+        exit(1);
+    }
+
+    db = new Database(argv[1]);
+    printf("%s\n", db->query("SELECT * FROM btc")[0][3].c_str());
+
+    Population pop(popSize, entropy, 0.001, 0.1, fitness);
+    pop.run(iterations, true);
+
+    //fitness(0b11010101101010);
+
+    delete db;
+
+    return 0;
+}
+
 double fitness(Chromosome chromo) {
+    int money = 30;
     bool* bitstring = bitArray(entropy, chromo);
 
     bool buyBTC  = bitstring[13];
@@ -66,28 +89,11 @@ double fitness(Chromosome chromo) {
     int trailingStop = bitstring[2] * 4 + bitstring[1] * 2 + bitstring[0];
     if(trailingStop == 0) trailingStop = 8;
 
-    //printf("BTC: %d\nLTC: %d\nDOGE: %d\nfreq: %d\nisExpMA: %d\nshort: %d\nlong: %d\nTStop: %d\n", buyBTC, buyLTC, buyDOGE, freq, isExpMA, shortPeriod, longPeriod, trailingStop);
-
     delete[] bitstring;
 
-    return 1.0/(abs(chromo - 17) + 1);
+    return backtest(money, buyBTC, buyLTC, buyDOGE, freq, isExpMA, shortPeriod, longPeriod, trailingStop);
 }
 
-int main(int argc, char **argv) {
-    if(argc < 2) {
-        printf("Incorrect usage\n");
-        exit(1);
-    }
-
-    db = new Database(argv[1]);
-    printf("%s\n", db->query("SELECT * FROM btc")[0][3].c_str());
-
-    Population pop(popSize, entropy, 0.001, 0.1, fitness);
-    pop.run(iterations, true);
-
-    //fitness(0b11010101101010);
-
-    delete db;
-
-    return 0;
+double backtest(int money, bool buyBTC, bool buyLTC, bool buyDOGE, int freq, bool isExpMA, int shortPeriod, int longPeriod, int trailingStop) {
+    return 1.0/pow(abs(freq - 17) + 1, 2);
 }

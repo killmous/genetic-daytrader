@@ -18,7 +18,7 @@ CC          = gcc
 LINKER      = $(CXX)
 ARCH        = 64
 
-CXXFLAGS    = -c -g -w -O3 -m$(ARCH) -std=c++0x
+CXXFLAGS    = -c -g -w -O3 -m$(ARCH) -std=c++11
 CCFLAGS     = -c -g -w -O3 -m$(ARCH)
 LINKFLAGS   = -pthread -ldl -m$(ARCH)
 
